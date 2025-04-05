@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Food Donate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="chatbot/chatbot.css">
+    <style>
+        /* 3D Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            overflow-x: hidden;
+            min-height: 100vh;
+            perspective: 1000px;
+            padding-top: 80px;
+            background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            background-blend-mode: overlay;
+            background-color: rgba(249, 249, 249, 0.9);
+        }
+
+        /* 3D Header with Depth */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transform-style: preserve-3d;
+            transform: translateZ(20px);
+            border-bottom: 1px solid rgba(6, 193, 103, 0.2);
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #333;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+            letter-spacing: 1px;
+            transform: translateZ(30px);
+        }
+
+        /* Navigation Bar */
+        .nav-bar {
+            display: flex;
+            transform-style: preserve-3d;
+        }
+
+        .nav-bar ul {
+            display: flex;
+            list-style: none;
+            transform-style: preserve-3d;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-bar ul li {
+            margin: 0 1rem;
+            transform-style: preserve-3d;
+        }
+
+        .nav-bar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .nav-bar ul li a:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #06C167;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-bar ul li a:hover:before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .nav-bar ul li a.active {
+            background: #06C167;
+            color: white;
+            box-shadow: 0 5px 15px rgba(6, 193, 103, 0.4);
+            transform: translateZ(10px);
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            transform-style: preserve-3d;
+        }
+
+        .hamburger .line {
+            width: 30px;
+            height: 3px;
+            background: #333;
+            margin: 6px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* 3D Content Sections */
+        .cover {
+            height: 300px;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/c1.jpeg');
+            background-size: cover;
+            background-position: center;
+            transform-style: preserve-3d;
+            transform: translateZ(10px);
+            margin-bottom: 40px;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .heading {
+            font-size: 3rem;
+            text-align: center;
+            margin:  0;
+            color: rgb(3, 2, 2);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            transform: translateZ(30px);
+            position: relative;
+            
+            padding: 15px;
+            border-radius: 10px;
+            display: inline-block;
+            left: 40%;
+            transform: translateX(-50%) translateZ(30px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 3D Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transform-style: preserve-3d;
+            transform: translateZ(20px) rotateY(-5deg);
+            transition: all 0.5s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .contact-form:hover {
+            transform: translateZ(40px) rotateY(0deg);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            transform-style: preserve-3d;
+        }
+
+        .contact-form label {
+            margin: 10px 0 5px;
+            font-weight: 600;
+            transform: translateZ(15px);
+            color: #333;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            transform: translateZ(10px);
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #06C167;
+            box-shadow: 0 0 0 2px rgba(6, 193, 103, 0.2);
+            transform: translateZ(15px);
+            background: white;
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .contact-form input[type="submit"] {
+            background: #06C167;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            transform: translateZ(20px);
+            box-shadow: 0 5px 15px rgba(6, 193, 103, 0.4);
+        }
+
+        .contact-form input[type="submit"]:hover {
+            background: #04a858;
+            transform: translateZ(30px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(6, 193, 103, 0.5);
+        }
+
+        /* 3D Contact Info */
+        .contact-info {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transform-style: preserve-3d;
+            transform: translateZ(20px) rotateY(5deg);
+            transition: all 0.5s ease;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .contact-info:hover {
+            transform: translateZ(40px) rotateY(0deg);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-info p {
+            margin: 15px 0;
+            font-size: 1.1rem;
+            transform: translateZ(15px);
+            color: #333;
+        }
+
+        /* 3D Chatbot Section */
+        .chatbot {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 2rem;
+            background: rgba(151, 243, 199, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transform-style: preserve-3d;
+            transform: translateZ(20px);
+            transition: all 0.5s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(6, 193, 103, 0.3);
+        }
+
+        .chatbot:hover {
+            transform: translateZ(30px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .chatbot p {
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+            transform: translateZ(20px);
+            color: #333;
+        }
+
+        .chatbot img {
+            transform: translateZ(15px);
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .hamburger {
+                display: block;
+                transform: translateZ(30px);
+            }
+
+            .nav-bar {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: rgba(255, 255, 255, 0.98);
+                transition: all 0.5s ease;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(10px);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 999;
+                flex-direction: column;
+            }
+
+            .nav-bar.active {
+                left: 0;
+            }
+
+            .nav-bar ul {
+                flex-direction: column;
+                padding: 2rem;
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-bar ul li {
+                margin: 1.5rem 0;
+            }
+
+            .nav-bar ul li a {
+                font-size: 1.3rem;
+                padding: 1rem 2rem;
+                display: block;
+            }
+
+            .hamburger.active .line:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 6px);
+            }
+
+            .hamburger.active .line:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .line:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -6px);
+            }
+
+            .contact-form, .contact-info, .chatbot {
+                width: 95%;
+                transform: translateZ(20px) rotateY(0deg);
+            }
+
+            .heading {
+                width: 90%;
+                font-size: 2rem;
+            }
+        }
+
+        /* 3D Animations */
+        @keyframes floatIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px) translateZ(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) translateZ(0);
+            }
+        }
+
+        .heading, .contact-form, .contact-info, .chatbot {
+            animation: floatIn 1s ease-out forwards;
+        }
+
+        .heading {
+            animation-delay: 0.2s;
+        }
+
+        .contact-form {
+            animation-delay: 0.4s;
+        }
+
+        .contact-info {
+            animation-delay: 0.6s;
+        }
+
+        .chatbot {
+            animation-delay: 0.8s;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">Food <b style="color: #06C167;">Donate</b></div>
+        <div class="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <nav class="nav-bar">
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><a href="profile.php">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector(".hamburger");
+            const navBar = document.querySelector(".nav-bar");
+            
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle("active");
+                navBar.classList.toggle("active");
+            });
+            
+            // Close menu when clicking on a link
+            const navLinks = document.querySelectorAll(".nav-bar ul li a");
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 900) {
+                        hamburger.classList.remove("active");
+                        navBar.classList.remove("active");
+                    }
+                });
+            });
+        });
+    </script>
+    
+    <section class="cover"></section>
+    
+    <p class="heading">Contact Us</p>
+    
+    <div class="contact-form"> 
+        <form action="feedback.php" method="post"> 
+            <label for="name">Name:</label> 
+            <input type="text" id="name" name="name" required>
+            <br> 
+            <label for="email">Email:</label> 
+            <input type="email" id="email" name="email" required>
+            <br> 
+            <label for="message">Message:</label> 
+            <textarea id="message" name="message" required></textarea>
+            <br> 
+            <input type="submit" value="Send" name="feedback"> 
+        </form> 
+    </div> 
+    
+    <div class="contact-info"> 
+        <p><i class="fa fa-envelope"></i> Email: fooddonate@gmail.com</p> 
+        <p><i class="fa fa-phone"></i> Phone: 555-555-5555</p> 
+        <p><i class="fa fa-map-marker"></i> Address: Vivekanda College</p> 
+    </div> 
+    
+    <div class="chatbot">
+        <p style="font-size: 23px; text-align: center;">
+            Chat Bot Support <img src="bot-mini.png" alt="Chat Bot" height="20">
+        </p>
+        <div id="container" class="container">
+            <div id="chat" class="chat">
+                <div id="messages" class="messages"></div>
+                <input id="input" type="text" placeholder="Say something..." autocomplete="off" />
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="chatbot/chatbot.js"></script>
+    <script type="text/javascript" src="chatbot/constants.js"></script> 
+    <script type="text/javascript" src="chatbot/speech.js"></script>
+</body>
+</html>

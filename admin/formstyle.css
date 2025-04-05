@@ -1,0 +1,144 @@
+/* formstyle.css */
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f1f1f1;
+    background: url(../img/bg.jpg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-size: cover;
+}
+
+/* Container for form */
+.container {
+    background-color: #fff;
+    padding: 40px 60px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Title */
+.title {
+    font-size: 28px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Input group styling */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    font-size: 14px;
+    color: #555;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.input-group input, .input-group textarea, .input-field select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    background-color: #f9f9f9;
+}
+
+.input-group input:focus, .input-group textarea:focus, .input-field select:focus {
+    border-color: #06C167;
+}
+
+/* Password field */
+.password {
+    position: relative;
+}
+
+.password input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+}
+
+.password .showHidePw {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+/* Button styling */
+button {
+    width: 100%;
+    padding: 14px;
+    background-color: #06C167;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #05a257;
+}
+
+/* Login/Sign-up text */
+.login-signup {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-signup .text {
+    font-size: 14px;
+    color: #555;
+}
+
+.login-signup .login-link {
+    color: #06C167;
+    text-decoration: none;
+}
+
+.login-signup .login-link:hover {
+    text-decoration: underline;
+}
+
+/* Error message */
+.error {
+    color: #d9534f;
+    font-size: 12px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 40px;
+    }
+
+    .title {
+        font-size: 24px;
+    }
+
+    button {
+        padding: 12px;
+    }
+}

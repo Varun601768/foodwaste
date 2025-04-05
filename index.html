@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Food Donate</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background:url("img/bg.jpg");
+        }
+
+        /* Container styling */
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Logo Styling */
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #06C167;
+            margin-bottom: 10px;
+        }
+
+        .logo b {
+            color: white;
+        }
+
+        /* Login as text */
+        .para {
+            font-size: 18px;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        /* Login button container */
+        .log {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Login buttons */
+        .log a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(6, 193, 103, 0.4);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Different colors for different user types */
+        .log a:nth-child(1) {
+            background: linear-gradient(135deg, #06C167, #049f55);
+        }
+
+        .log a:nth-child(2) {
+            background: linear-gradient(135deg, #d35400, #e74c3c);
+        }
+
+        .log a:nth-child(3) {
+            background: linear-gradient(135deg, #2980b9, #3498db);
+        }
+
+        /* Hover Effects */
+        .log a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Icons */
+        .log i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p class="logo">Welcome to Food <b>Donate</b></p>
+        <p class="para">Login as</p>
+        <div class="log">
+            <a href="signup.php"><i class="fa-solid fa-user"></i> User</a>
+            <a href="admin/signup.php"><i class="fa-solid fa-user-shield"></i> Admin</a>
+            <a href="delivery/deliverysignup.php" id="delivery"><i class="fa-solid fa-moped"></i> Delivery</a>
+        </div>
+    </div>
+</body>
+</html>

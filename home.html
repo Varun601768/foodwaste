@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Donate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: url('img/bg.jpg');
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* 3D Header Styles */
+        header {
+            background: #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transform-style: preserve-3d;
+            transform: translateZ(20px);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #333;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            transform: translateZ(30px);
+        }
+
+        .nav-bar ul {
+            display: flex;
+            list-style: none;
+            transform-style: preserve-3d;
+        }
+
+        .nav-bar ul li {
+            margin: 0 1rem;
+            transform-style: preserve-3d;
+        }
+
+        .nav-bar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .nav-bar ul li a:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #06C167;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-bar ul li a:hover:before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .nav-bar ul li a.active {
+            background: #06C167;
+            color: white;
+            box-shadow: 0 5px 15px rgba(6, 193, 103, 0.4);
+            transform: translateZ(10px);
+        }
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            perspective: 500px;
+        }
+
+        .hamburger .line {
+            width: 30px;
+            height: 3px;
+            background: #333;
+            margin: 6px 0;
+            transition: all 0.4s ease;
+            transform-origin: center;
+        }
+
+
+       
+        /* Immersive 3D Banner */
+        .banner {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('img/banner.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, rgba(6, 193, 103, 0.1) 100%);
+            z-index: 1;
+        }
+        
+        .banner a {
+            padding: 1.2rem 2.5rem;
+            background: #06C167;
+            color: white;
+            text-decoration: none;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            transform: rotateX(15deg) translateZ(60px);
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+            border: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .banner a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .banner a:hover {
+            transform: rotateX(15deg) translateZ(80px) scale(1.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .banner a:hover::before {
+            left: 100%;
+        }
+
+           /* 3D Content Section */
+           .content {
+            padding: 8rem 10%;
+            text-align: center;
+            background: white;
+            transform-style: preserve-3d;
+            position: relative;
+            box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.05);
+            margin-top: -50px;
+            z-index: 2;
+            border-radius: 30px 30px 0 0;
+            transform: translateZ(20px);
+        }
+
+        .content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('img/pattern.png');
+            opacity: 0.03;
+            z-index: -1;
+        }
+        .content p {
+            margin: 2rem 0;
+            line-height: 1.8;
+            transform: translateZ(40px);
+            font-size: 1.5rem;
+            color: #555;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+        }
+
+        .content p::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%) translateZ(20px);
+            width: 100px;
+            height: 4px;
+            background: #06C167;
+            border-radius: 2px;
+        }
+        /* Photo Gallery with 3D Cards */
+        .photo {
+            padding: 5rem 10%;
+            background: #f9f9f9;
+            text-align: center;
+            transform-style: preserve-3d;
+        }
+
+        .heading {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+            transform: translateZ(50px);
+            position: relative;
+            display: inline-block;
+        }
+
+        .heading::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%) translateZ(30px);
+            width: 80px;
+            height: 5px;
+            background: #06C167;
+            border-radius: 3px;
+        }
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+            margin-top: 4rem;
+            perspective: 1000px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .box {
+            width: 350px;
+            height: 350px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            position: relative;
+            background: white;
+        }
+        .box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(6, 193, 103, 0.3) 0%, transparent 100%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .box:hover {
+            transform: translateY(-20px) translateZ(50px) rotateY(10deg);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+        }
+
+        .box:hover::before {
+            opacity: 1;
+        }
+
+        .box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .box:hover img {
+            transform: scale(1.1);
+        }
+
+        /* 3D Delivery Section with Depth */
+        .deli {
+            padding: 6rem 10%;
+            background: white;
+            text-align: center;
+            transform-style: preserve-3d;
+            position: relative;
+            box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.05);
+        }
+
+        .para {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            transform: translateZ(20px);
+        }
+
+        .deli img {
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transform: rotateY(-5deg) translateZ(30px);
+            transition: all 0.5s ease;
+        }
+
+        .deli img:hover {
+            transform: rotateY(-15deg) translateZ(70px);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 3D Footer with Layered Design */
+        .footer {
+            background: linear-gradient(135deg, #222 0%, #111 100%);
+            color: white;
+            padding: 5rem 10%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-left, .footer-center, .footer-right {
+            flex: 1;
+            min-width: 300px;
+            margin-bottom: 2rem;
+            transform-style: preserve-3d;
+        }
+
+        .footer h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #06C167;
+            transform: translateZ(30px);
+        }
+
+        .footer h2 span {
+            color: white;
+        }
+
+        .footer p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            transform: translateZ(20px);
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('img/map.png');
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        .footer-left, .footer-center, .footer-right {
+            flex: 1;
+            min-width: 300px;
+            margin-bottom: 2rem;
+            transform-style: preserve-3d;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #06C167;
+            transform: translateZ(50px);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer h2 span {
+            color: white;
+        }
+
+        .footer p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            transform: translateZ(30px);
+            color: #ddd;
+        }
+
+        .footer span {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            color: white;
+            transform: translateZ(40px);
+        }
+
+        .sociallist {
+            margin-top: 2rem;
+            transform-style: preserve-3d;
+        }
+
+        .social {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            transform-style: preserve-3d;
+        }
+
+        .social li {
+            transform-style: preserve-3d;
+            perspective: 500px;
+        }
+
+        .social li a {
+            display: block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: translateZ(30px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(6, 193, 103, 0.4), transparent);
+            transition: 0.5s;
+        }
+
+        .social li a:hover {
+            background: #06C167;
+            transform: translateZ(50px) rotateY(360deg);
+            box-shadow: 0 10px 25px rgba(6, 193, 103, 0.4);
+        }
+
+        .social li a:hover::before {
+            left: 100%;
+        }
+
+        .social li a i {
+            color: white;
+            font-size: 20px;
+        }
+
+        .menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            transform-style: preserve-3d;
+        }
+
+        .menu a {
+            color: #bbb;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            transform: translateZ(30px);
+            position: relative;
+        }
+
+        .menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #06C167;
+            transition: width 0.3s ease;
+        }
+
+        .menu a:hover {
+            color: #06C167;
+        }
+
+        .menu a:hover::after {
+            width: 100%;
+        }
+
+        .name {
+            color: #999;
+            font-size: 0.9rem;
+            transform: translateZ(20px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .hamburger {
+                display: block;
+                transform: translateZ(40px);
+            }
+
+            .hamburger.active .line:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 6px);
+            }
+
+            .hamburger.active .line:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .line:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -6px);
+            }
+
+            .nav-bar {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: rgba(255, 255, 255, 0.98);
+                transition: all 0.5s ease;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(10px);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 999;
+            }
+
+            .nav-bar.active {
+                left: 0;
+            }
+
+            .nav-bar ul {
+                flex-direction: column;
+                padding: 2rem;
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-bar ul li {
+                margin: 1.5rem 0;
+            }
+
+            .nav-bar ul li a {
+                font-size: 1.3rem;
+                padding: 1rem 2rem;
+                display: block;
+            }
+
+            .wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .box {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .content, .photo, .deli {
+                padding: 5rem 8%;
+            }
+        }
+
+        /* 3D Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: rotateX(15deg) translateZ(60px) translateY(0);
+            }
+            50% {
+                transform: rotateX(15deg) translateZ(80px) translateY(-20px);
+            }
+        }
+
+        .banner a {
+            animation: float 5s ease-in-out infinite;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateZ(50px) translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateZ(50px) translateY(0);
+            }
+        }
+
+        .content, .photo, .deli, .footer {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        /* Custom Scrollbar with 3D Effect */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #06C167, #04a858);
+            border-radius: 10px;
+            border: 2px solid #f1f1f1;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #04a858, #038c4a);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">Food <b style="color: #06C167;">Donate</b></div>
+        <div class="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <nav class="nav-bar">
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="profile.php">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    <script>
+        hamburger=document.querySelector(".hamburger");
+        hamburger.onclick =function(){
+            navBar=document.querySelector(".nav-bar");
+            navBar.classList.toggle("active");
+        }
+    </script>
+    <section class="banner">
+        <a href="fooddonateform.php">Donate Food</a>
+    </section>
+    <div class="content">
+        <p style="font-size: 23px;">
+            "Cutting food waste is a delicious way of saving money, helping to feed the world and protect the planet." 
+        </p>
+    </div>
+    <div class="photo">
+      <p class="heading">Our Works</p>
+      <p style="font-size: 28px; text-align: center;">"Look what we can do together."</p>
+      <div class="wrapper">
+        <div class="box"><img src="img/c.jpg" alt="Food donation"></div>
+        <div class="box"><img src="img/p4.jpeg" alt="Community help"></div>
+        <div class="box"><img src="img/p3.jpeg" alt="Volunteers working"></div>
+      </div>
+    </div>
+    <div class="deli">
+      <p class="heading">DOOR PICKUP</p>
+      <br>
+      <p class="para">"Your donation will be immediately collected and sent to needy people"</p>
+      <img src="img/delivery.gif" alt="Delivery service">
+    </div>
+    <footer class="footer">
+        <div class="footer-left col-md-4 col-sm-6">
+          <p class="about">
+            <span> About us</span>The basic concept of this project Food Waste Management is to collect the excess/leftover food from donors such as hotels, restaurants, marriage halls, etc and distribute to the needy people.
+          </p>
+        </div>
+        <div class="footer-center col-md-4 col-sm-6">
+          <div>
+            <p><span> Contact</span> </p>
+          </div>
+          <div>
+            <p> (+91)9481601768</p>
+          </div>
+          <div>
+            <p><a href="#"> Fooddonate@gmail.com</a></p>
+          </div>
+          <div class="sociallist">
+            <ul class="social">
+              <li><a href="https://www.facebook.com/TheAkshayaPatraFoundation/"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="https://twitter.com/globalgiving"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="https://www.instagram.com/charitism/"><i class="fa fa-instagram"></i></a></li>
+              <li><a href="https://web.whatsapp.com/"><i class="fa fa-whatsapp"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-right col-md-4 col-sm-6">
+          <h2> Food<span> Donate</span></h2>
+          <p class="menu">
+            <a href="#"> Home</a> |
+            <a href="about.html"> About</a> |
+            <a href="profile.php"> Profile</a> |
+            <a href="contact.html"> Contact</a>
+          </p>
+          <p class="name"> DESIGNED BY Foodies</p>
+        </div>
+    </footer>
+</body>
+</html>
