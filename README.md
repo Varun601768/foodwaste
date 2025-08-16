@@ -67,7 +67,7 @@ This project is licensed under the **MIT License**.
 
 ## 👨‍💻 Authors
 - **Your Name** – Varun M C
-- **Team Members (if any)**  
+ 
 
 ---
 
